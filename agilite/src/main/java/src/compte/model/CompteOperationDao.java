@@ -11,13 +11,16 @@ public class CompteOperationDao {
 	private ClientDao destinataire;
 	private ClientDao emetteur;
 
-	public CompteOperationDao(Integer id, String libelle, BigDecimal montant, ClientDao destinataire, ClientDao emetteur) {
+	public CompteOperationDao(Integer id, String libelle, BigDecimal montant, ClientDao destinataire, ClientDao emetteur) throws Exception {
 		super();
 		this.id = id;
 		this.libelle = libelle;
 		this.montant = montant;
-		this.destinataire = destinataire;
-		this.emetteur = emetteur;
+		if (destinataire != null && emetteur != null) {
+			this.destinataire = destinataire;
+			this.emetteur = emetteur;
+		} else throw new Exception("Un ou plusieurs identifiants n'existe pas");
+
 	}
 
 	public CompteOperationDao() {
