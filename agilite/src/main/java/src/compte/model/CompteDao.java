@@ -11,11 +11,15 @@ public class CompteDao {
 	private TypeCompte typeCompte;
 	private List<CompteOperationDao> historiqueOperations;
 
-	public CompteDao(Integer id, String name, BigDecimal solde, TypeCompte typeCompte, List<CompteOperationDao> historiqueOperations) {
+	public CompteDao(Integer id, String name, BigDecimal solde, TypeCompte typeCompte, List<CompteOperationDao> historiqueOperations) throws Exception{
 		super();
 		this.id = id;
 		this.name = name;
-		this.solde = solde;
+
+		if (solde.intValue() >= 100)  {
+			this.solde = solde;
+		} else throw new Exception("Solde inférieur à 100.");
+
 		this.typeCompte = typeCompte;
 		this.historiqueOperations = historiqueOperations;
 	}
